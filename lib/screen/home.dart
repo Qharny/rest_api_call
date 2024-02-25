@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rest_api_call/color/color.dart';
+import 'package:rest_api_call/screen/view.dart';
 
 class home extends StatelessWidget {
   const home({super.key});
@@ -12,11 +13,24 @@ class home extends StatelessWidget {
         backgroundColor: primaryColor,
         title: const Text(
           'Rest API Call',
-          style: TextStyle(color: whiteColor),
+          style: TextStyle(
+              color: whiteColor, fontSize: 30, fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
       ),
-      body: ListView(),
+      body: Column(
+        children: [
+          const viewList(),
+          FloatingActionButton(
+            
+            backgroundColor: primaryColor,
+            child: const Icon(Icons.refresh, color: whiteColor),
+            onPressed: () {
+              print('Button Clicked');
+            },
+          )
+        ],
+      ),
     );
   }
 }

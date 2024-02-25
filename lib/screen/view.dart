@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class listView extends StatelessWidget {
-  const listView({super.key});
+class viewList extends StatelessWidget {
+  const viewList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const ListTile();
   }
 }
