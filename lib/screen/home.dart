@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
           // final name = user['name'];
           return ListTile(
             // title: Text(email),
-            title: Text('Name: ${users[index]['name']['first']['last']}', style: TextStyle(fontWeight: FontWeight.w500),),
+            title: Text('Name: ${users[index]['name']['first']}', style: const TextStyle(fontWeight: FontWeight.w500),),
             subtitle: Text('Email: ${users[index]['email']}'),
             leading: CircleAvatar(
               backgroundImage:
