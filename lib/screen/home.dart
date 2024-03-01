@@ -1,11 +1,21 @@
+import 'dart:convert';
+import 'dart:js';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:rest_api_call/color/color.dart';
 import 'package:rest_api_call/screen/view.dart';
 import 'package:http/http.dart' as http;
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key});
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  List<dynamic> users = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,25 +32,48 @@ class Home extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: const Column(
+      body: Column(
         children: [
-          Expanded(child: viewList()),
+          Expanded(
+              child: ListView.builder(
+            itemCount: users.length,
+            itemBuilder: (context, index) {
+              final user = users[index];
+              final email = user['email'];
+              return ListTile(
+                title: Text(email),
+                //   title: Text('Name: ${users[index]['name']['first']}'),
+                //   subtitle: Text('Email: ${users[index]['email']}'),
+                //   leading: CircleAvatar(
+                //     backgroundImage:
+                //         NetworkImage(users[index]['picture']['thumbnail']),
+                //   ),
+              );
+            },
+          )),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: primaryColor,
-        child: const Icon(Icons.refresh, color: whiteColor),
         onPressed: fetchUsers,
+        child: const Icon(Icons.refresh, color: whiteColor),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 
-  void fetchUsers() {
+  Future<void> fetchUsers() async {
     // creating variable to store url
-    const url = "https://randomuser.me/api/?results=5000";
+    const url = "https://randomuser.me/api/?results=10"; //  get random users
     final link = Uri.parse(url);
-    http.get(link);
+    final response = await http.get(link);
+    final body = response.body;
+    // decodes the json api code
+    final json = jsonDecode(body);
+    setState(() {
+      users = json('result');
+    });
+    print("Successful");
   }
 }
 
