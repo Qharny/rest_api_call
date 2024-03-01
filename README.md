@@ -1,16 +1,14 @@
-# rest_api_call
+# Rest API Call
 
-A new Flutter project.
+    Practicing how to implement APIs in my code.
 
-## Getting Started
+    the actual name for the app is Random Email Generator
 
-This project is a starting point for a Flutter application.
+## Email Generator
+-   The email generator will generate a random
+-   using an api
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+*   [x] Create a function that generates a random email between 0 and 100 (inclusive). api usage
+*   
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
