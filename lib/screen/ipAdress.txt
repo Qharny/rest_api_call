@@ -1,0 +1,90 @@
+// ignore_for_file: use_key_in_widget_constructors
+
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+class Home extends StatefulWidget {
+  const Home({Key? key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  Map<String, dynamic> userData = {}; // Renamed users to userData
+
+  bool isLoading = false; // Added isLoading variable
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Rest API Call',
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        centerTitle: true,
+      ),
+      body: isLoading
+          ? Center(child: CircularProgressIndicator())
+          : userData
+                  .isNotEmpty // Check if userData is not empty before building ListView
+              ? ListView(
+                  children: [
+                    ListTile(
+                      title: Text('IP: ${userData['ip']}'),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('City: ${userData['city']}'),
+                          Text('Region: ${userData['region']}'),
+                          Text('Country: ${userData['country']}'),
+                          Text('Location: ${userData['loc']}'),
+                          Text('Organization: ${userData['org']}'),
+                          Text('Postal: ${userData['postal']}'),
+                          Text('Timezone: ${userData['timezone']}'),
+                          Text('Readme: ${userData['readme']}'),
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+              : Center(
+                  child: Text('No data available.'),
+                ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: fetchUserData,
+        child: const Icon(Icons.refresh),
+      ),
+    );
+  }
+
+  void fetchUserData() async {
+    print("Fetching user data...");
+    setState(() => isLoading = true);
+    try {
+      const url = "https://ipinfo.io/161.185.160.93/geo";
+      final link = Uri.parse(url);
+      final response = await http.get(link);
+      final body = response.body;
+      final json = jsonDecode(body);
+      setState(() {
+        userData = json; // Assigning the entire JSON response to userData
+      });
+    } catch (e) {
+      print("Error fetching user data: $e");
+    } finally {
+      setState(() => isLoading = false);
+    }
+  }
+}
+
+
+
+// Get random mails
+// https://randomuser.me/api/
