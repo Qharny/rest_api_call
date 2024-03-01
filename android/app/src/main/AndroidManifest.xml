@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="Random Email Generator"
-        android:name="${applicationName}"
+        android:label="Get random user emails"
+        android:name="$Random Email Generator"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
