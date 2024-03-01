@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rest_api_call/color/color.dart';
 import 'package:rest_api_call/screen/view.dart';
+import 'package:http/http.dart' as http;
 
 class Home extends StatelessWidget {
   const Home({Key? key});
@@ -29,12 +30,17 @@ class Home extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: primaryColor,
         child: const Icon(Icons.refresh, color: whiteColor),
-        onPressed: () {
-          // create a function to refresh the list
-        },
+        onPressed: fetchUsers,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
+  }
+
+  void fetchUsers() {
+    // creating variable to store url
+    const url = "https://randomuser.me/api/?results=5000";
+    final link = Uri.parse(url);
+    http.get(link);
   }
 }
 
