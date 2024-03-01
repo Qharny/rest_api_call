@@ -81,7 +81,7 @@ flutter:
   # - ios/Runner/Assets.xcassets/AppIcon.appiconset/_/AppIcon-76x76@2x.png
   # - ios/Runner/Assets.xcassets/AppIcon.appiconset/_/AppIcon-83.5x83.5@2x.png
   # - ios/Runner/Assets.xcassets/AppIcon.appiconset/_/AppIcon-1024x1024@1x.png
-  # # Add all other icon paths here...
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
