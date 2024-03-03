@@ -45,9 +45,8 @@ class _HomeState extends State<Home> {
                     // final user = users[index];
                     // final email = user['email'];
                     // final name = user['name'];
-                    
                     return ListTile(
-                      // title: Text(email),
+                      // title: Text(email), 
                       title: Text(
                         'Name: ${users[index]['name']['first']}',
                         style: const TextStyle(fontWeight: FontWeight.w500),
