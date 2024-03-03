@@ -14,7 +14,6 @@ class splashscreen extends StatefulWidget {
 
 class _splashscreenState extends State<splashscreen> {
   @override
-
   void initState() {
     super.initState();
     // Start the countdown timer when the widget is initialized
@@ -29,13 +28,13 @@ class _splashscreenState extends State<splashscreen> {
       // Navigate to the next screen using Navigator
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) =>
-              const Home(), // Replace NextScreen() with the actual screen you want to navigate to
+          builder: (context) => const Home(),
         ),
       );
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Colors.white,

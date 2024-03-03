@@ -17,7 +17,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<dynamic> users = [];
 
-  set isLoading(bool isLoading) {}
+  bool isLoading = false;
+
+  // set isLoading(bool isLoading) {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,23 +36,32 @@ class _HomeState extends State<Home> {
         ),
         centerTitle: true,
       ),
-      body: ListView.builder(
-        itemCount: users.length,
-        itemBuilder: (context, index) {
-          // final user = users[index];
-          // final email = user['email'];
-          // final name = user['name'];
-          return ListTile(
-            // title: Text(email),
-            title: Text('Name: ${users[index]['name']['first']}', style: const TextStyle(fontWeight: FontWeight.w500),),
-            subtitle: Text('Email: ${users[index]['email']}'),
-            leading: CircleAvatar(
-              backgroundImage:
-                  NetworkImage(users[index]['picture']['thumbnail']),
-            ),
-          );
-        },
-      ),
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : users.isNotEmpty
+              ? ListView.builder(
+                  itemCount: users.length,
+                  itemBuilder: (context, index) {
+                    // final user = users[index];
+                    // final email = user['email'];
+                    // final name = user['name'];
+                    return ListTile(
+                      // title: Text(email),
+                      title: Text(
+                        'Name: ${users[index]['name']['first']}',
+                        style: const TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                      subtitle: Text('Email: ${users[index]['email']}'),
+                      leading: CircleAvatar(
+                        backgroundImage:
+                            NetworkImage(users[index]['picture']['thumbnail']),
+                      ),
+                    );
+                  },
+                )
+              : const Center(
+                  child: Text("No internet Connection."),
+                ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: primaryColor,
         onPressed: fetchUsers,
@@ -65,7 +76,7 @@ class _HomeState extends State<Home> {
     setState(() => isLoading = true);
     try {
       // creating variable to store url
-      const url = "https://randomuser.me/api/?results=100"; //  get random users
+      const url = "https://randomuser.me/api/?results=100"; // get random users
       final link = Uri.parse(url);
       final response = await http.get(link);
       final body = response.body;
@@ -75,14 +86,10 @@ class _HomeState extends State<Home> {
         users = json['results'];
       });
     } catch (e) {
-      print(e);
+      print("Error fetching user data: $e");
     } finally {
       setState(() => isLoading = false);
     }
     print("Users called successful");
   }
 }
-
-
-// Get ip address
-// https://ipinfo.io/161.185.160.93/geo
